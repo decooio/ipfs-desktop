@@ -8,53 +8,8 @@ env:
 
 jobs:
 
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
-
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Cache bigger downloads
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: ${{ github.workspace }}/.cache
-          key: ${{ runner.os }}-${{ hashFiles('package.json', 'package-lock.json', 'electron-builder.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ hashFiles('package.json', 'package-lock.json', 'electron-builder.yml') }}
-            ${{ runner.os }}-
-
-      - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit --progress=false --cache ${{ github.workspace }}/.cache/npm
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm run test
-
-      - name: Test end-to-end
-        uses: GabrielBB/xvfb-action@f040be23a619e5ec34116f24098ad3626ceab681 # v1.4
-        with:
-          working-directory: ${{ github.workspace }}
-          run: npm run test:e2e
-
-      - name: Lint
-        run: npm run lint
-
   build:
     runs-on: ${{ matrix.os }}
-    needs: test # build packages only if tests passed
     strategy:
       fail-fast: false
       matrix:
@@ -110,6 +65,7 @@ jobs:
           APPLEID: ${{ secrets.apple_id }}
           APPLEIDPASS: ${{ secrets.apple_id_pass }}
 
+
       - name: Show dist/
         run: du -sh dist/ && ls -l dist/
 
@@ -121,7 +77,27 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist-${{ matrix.os }}
-          path: dist/*esktop*.*
+          path: |
+            dist/*esktop*.*
+            dist/*.yml
+          if-no-files-found: error
+
+      - name: pack32 for win
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: npm run pack32
+
+      - name: Show dist/ for pack32
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: du -sh dist/ && ls -l dist/
+
+      - name: Attach produced packages to Github Action for pack32
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-${{ matrix.os }}-32
+          path: |
+            dist/*esktop*.*
+            dist/*.yml
           if-no-files-found: error
 
       - name: Show Cache

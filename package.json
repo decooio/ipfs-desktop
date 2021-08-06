@@ -19,7 +19,7 @@
     "build:webui:minimize": "shx rm -rf assets/webui/static/js/*.map && shx rm -rf assets/webui/static/css/*.map",
     "package": "shx rm -rf dist/ && run-s build && electron-builder --publish onTag",
     "pack64": "shx rm -rf dist/ && electron-builder --publish onTag",
-    "pack32": "shx rm -rf dist/ && electron-builder --ia32 --publish onTag",
+    "pack32": "electron-builder --ia32 --publish onTag",
     "packAll": "shx rm -rf dist/ && electron-builder --x64 --ia32 --publish onTag"
   },
   "pre-commit": [
