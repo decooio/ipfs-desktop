@@ -201,7 +201,7 @@ function buildMenu (ctx) {
         },
         {
           label: `ipfs-desktop ${VERSION}`,
-          click: () => { shell.openExternal(`https://github.com/ipfs-shipyard/ipfs-desktop/releases/v${VERSION}`) }
+          click: () => { shell.openExternal(`https://github.com/decooio/ipfs-desktop/releases/v${VERSION}`) }
         },
         {
           label: hasCustomBinary()
@@ -223,7 +223,7 @@ function buildMenu (ctx) {
         { type: 'separator' },
         {
           label: i18n.t('viewOnGitHub'),
-          click: () => { shell.openExternal('https://github.com/ipfs-shipyard/ipfs-desktop/blob/master/README.md') }
+          click: () => { shell.openExternal('https://github.com/decooio/ipfs-desktop/blob/master/README.md') }
         },
         {
           label: i18n.t('helpUsTranslate'),

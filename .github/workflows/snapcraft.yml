@@ -12,7 +12,7 @@ jobs:
       - name: Download .snap artifact
         uses: dsaltares/fetch-gh-release-asset@aa37ae5c44d3c9820bc12fe675e8670ecd93bd1c # 0.0.5
         with:
-          repo: ipfs-shipyard/ipfs-desktop
+          repo: decooio/ipfs-desktop
           version: tags/${{ github.event.release.tag_name }}
           file: ipfs-desktop-${{ github.event.release.name }}-linux-amd64.snap
 

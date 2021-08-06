@@ -68,7 +68,7 @@ function setup (ctx) {
     })
 
     if (opt === 1) {
-      shell.openExternal(`https://github.com/ipfs-shipyard/ipfs-desktop/releases/v${version}`)
+      shell.openExternal(`https://github.com/decooio/ipfs-desktop/releases/v${version}`)
     }
   })
 
@@ -148,7 +148,7 @@ module.exports = async function (ctx) {
   }
   if (!isAutoUpdateSupported()) {
     ctx.manualCheckForUpdates = () => {
-      shell.openExternal('https://github.com/ipfs-shipyard/ipfs-desktop/releases/latest')
+      shell.openExternal('https://github.com/decooio/ipfs-desktop/releases/latest')
     }
     return
   }

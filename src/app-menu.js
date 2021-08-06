@@ -42,7 +42,7 @@ const template = [
       {
         label: 'Learn More',
         click () {
-          shell.openExternal('https://github.com/ipfs-shipyard/ipfs-desktop')
+          shell.openExternal('https://github.com/decooio/ipfs-desktop')
         }
       }
     ]
