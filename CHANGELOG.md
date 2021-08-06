@@ -3,6 +3,55 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.16.2] - 2021-07-23
+
+- IPFS: [`go-ipfs v0.9.1`](https://github.com/ipfs/go-ipfs/releases/tag/v0.9.1)
+- UI: [`v2.12.4`](https://github.com/ipfs-shipyard/ipfs-webui/releases/v2.12.4)
+
+### 🛠 Fixes and Maintenance
+
+- fix: go-ipfs 0.9.1 (#1876)
+- chore: electron v13.1.7 (43da717df49812cbddd067e8521da42d849b8f6c)
+- chore(i18n):  locale sync
+
+## [v0.16.1] - 2021-07-06
+
+- IPFS: [`go-ipfs v0.9.0`](https://github.com/ipfs/go-ipfs/releases/tag/v0.9.0)
+- UI: [`v2.12.4`](https://github.com/ipfs-shipyard/ipfs-webui/releases/v2.12.4)
+
+### 🛠 Fixes and Maintenance
+
+- fix: ipfs-webui v2.12.4 (#1868)
+- fix: dont pin when adding to mfs (#1860)
+- fix: show Files after import on windows (#1853)
+- fix: choco publishing
+- chore(i18n):  locale sync
+
+## [v0.16.0] - 2021-06-23
+
+- IPFS: [`go-ipfs v0.9.0`](https://github.com/ipfs/go-ipfs/releases/tag/v0.9.0)
+- UI: [`v2.12.3`](https://github.com/ipfs-shipyard/ipfs-webui/releases/v2.12.3)
+
+### ✨ Features
+
+- go-ipfs 0.9.0 ([RELEASE NOTES](https://github.com/ipfs/go-ipfs/releases/tag/v0.9.0))
+
+### 🛠 Fixes and Maintenance
+
+- electron 13.x (+ new electron-builder/updater)
+- chore(i18n):  locale sync
+
+## [v0.15.1] - 2021-06-17
+
+- IPFS: [`go-ipfs v0.8.0`](https://github.com/ipfs/go-ipfs/releases/tag/v0.8.0)
+- UI: [`v2.12.3`](https://github.com/ipfs-shipyard/ipfs-webui/releases/v2.12.3)
+
+### 🛠 Fixes and Maintenance
+
+- fix: ipfs-webui  [`v2.12.3`](https://github.com/ipfs-shipyard/ipfs-webui/releases/v2.12.3)
+- fix: useful errors on download fail (#1843)
+- chore(i18n): locale sync
+
 ## [v0.15.0] - 2021-05-04
 
 - IPFS: [`go-ipfs v0.8.0`](https://github.com/ipfs/go-ipfs/releases/tag/v0.8.0)

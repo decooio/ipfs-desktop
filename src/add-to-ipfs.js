@@ -69,6 +69,8 @@ function sendNotification (failures, successes, launchWebUI, path) {
   }
 
   fn({ title, body }, () => {
+    // force refresh for Files screen to pick up newly added items
+    // https://github.com/ipfs/ipfs-desktop/issues/1763
     launchWebUI(link, { forceRefresh: true })
   })
 }
@@ -87,7 +89,7 @@ module.exports = async function ({ getIpfsd, launchWebUI }, files) {
 
   await Promise.all(files.map(async file => {
     try {
-      const result = await ipfsd.api.add(globSource(file, { recursive: true }))
+      const result = await ipfsd.api.add(globSource(file, { recursive: true }), { pin: false })
       await copyFile(ipfsd.api, result.cid, result.path)
       successes.push(result)
     } catch (e) {
