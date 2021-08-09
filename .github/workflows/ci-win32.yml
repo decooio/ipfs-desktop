@@ -32,7 +32,9 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit --progress=false --cache ${{ github.workspace }}/.cache/npm
+        run: |
+          npm i -g cross-env
+          cross-env TARGET_ARCH=386 npm ci --prefer-offline --no-audit --progress=false --cache ${{ github.workspace }}/.cache/npm
 
       - name: Build
         run: npm run build

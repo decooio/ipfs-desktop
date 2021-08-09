@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-const { autoUpdater } = require('electron-updater')
+const { autoUpdater } = require('@decooio/electron-updater')
 const logger = require('../common/logger')
 
 // adapted from https://github.com/electron-userland/electron-builder/issues/1604#issuecomment-372091881

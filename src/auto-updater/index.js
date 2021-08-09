@@ -1,5 +1,5 @@
 const { shell } = require('electron')
-const { autoUpdater } = require('electron-updater')
+const { autoUpdater } = require('@decooio/electron-updater')
 const i18n = require('i18next')
 const { ipcMain } = require('electron')
 const logger = require('../common/logger')
