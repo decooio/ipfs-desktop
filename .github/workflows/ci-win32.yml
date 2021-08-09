@@ -1,7 +1,7 @@
-name: ci
+name: ci-win32
 on: 
   push:
-    branches: [main]
+    branches: [win32]
 
 env:
   XDG_CACHE_HOME: ${{ github.workspace }}/.cache
@@ -11,12 +11,7 @@ env:
 jobs:
 
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
+    runs-on: windows-latest
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
@@ -42,15 +37,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@12319896edaa290b27558e34a177804e9b8d077b # v1
-        continue-on-error: true # empty steps.tag.outputs.tag will inform the next step
-
       - name: Build binaries with electron-builder
         uses: samuelmeuli/action-electron-builder@92327c67bc45ff7c38bf55d8aa8c4d75b7ea38e7 # v1.6.0 but safer than a tag that can be changed
         with:
-          args: --publish onTag # attach signed binaries to a release draft only when building a tag
+          args: --windows --ia32 # attach signed binaries to a release draft only when building a tag
           release: false # keep github release as draft for manual inspection
           max_attempts: 2
           # GH token for attaching atrifacts to release draft on tag build
@@ -62,7 +52,7 @@ jobs:
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
         env:
-          CI_BUILD_TAG: ${{steps.tag.outputs.tag}} # used by --publish onTag
+          # CI_BUILD_TAG: ${{steps.tag.outputs.tag}} # used by --publish onTag
           # Apple notarization
           APPLEID: ${{ secrets.apple_id }}
           APPLEIDPASS: ${{ secrets.apple_id_pass }}
@@ -78,25 +68,7 @@ jobs:
       - name: Attach produced packages to Github Action
         uses: actions/upload-artifact@v2
         with:
-          name: dist-${{ matrix.os }}
-          path: |
-            dist/*esktop*.*
-            dist/*.yml
-          if-no-files-found: error
-
-      - name: pack32 for win
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: npm run pack32
-
-      - name: Show dist/ for pack32
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: du -sh dist/ && ls -l dist/
-
-      - name: Attach produced packages to Github Action for pack32
-        if: ${{ matrix.os == 'windows-latest' }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist-${{ matrix.os }}-win32
+          name: dist-windows-latest-win32
           path: |
             dist/*esktop*.*
             dist/*.yml

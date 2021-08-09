@@ -1,7 +1,7 @@
 {
   "name": "ipfs-desktop",
   "private": true,
-  "version": "0.16.2",
+  "version": "0.16.0",
   "productName": "IPFS Desktop",
   "description": "IPFS Native Application",
   "main": "src/index.js",
@@ -19,7 +19,7 @@
     "build:webui:minimize": "shx rm -rf assets/webui/static/js/*.map && shx rm -rf assets/webui/static/css/*.map",
     "package": "shx rm -rf dist/ && run-s build && electron-builder --publish onTag",
     "pack64": "shx rm -rf dist/ && electron-builder --publish onTag",
-    "pack32": "electron-builder --ia32 --publish onTag",
+    "pack32": "shx rm -rf dist/ && run-s build && electron-builder --windows nsis:ia32 --publish onTag",
     "packAll": "shx rm -rf dist/ && electron-builder --x64 --ia32 --publish onTag"
   },
   "pre-commit": [
@@ -80,7 +80,7 @@
     "countly-sdk-nodejs": "^19.8.0",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.0.0",
-    "electron-updater": "4.3.9",
+    "@decooio/electron-updater": "0.0.1",
     "fix-path": "^3.0.0",
     "fs-extra": "^9.1.0",
     "go-ipfs": "0.9.1",
